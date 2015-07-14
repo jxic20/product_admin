@@ -10,40 +10,40 @@ package domain;
  * @author monvi967
  */
 public class Customer {
-    public string username;
-    public string name;
-    public integer credit_card;
-    public string password;
+    public String username;
+    public String name;
+    public Integer credit_card;
+    public String password;
 
-    public string getUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public void setUsername(string username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
-    public string getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(string name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public integer getCredit_card() {
+    public Integer getCredit_card() {
         return credit_card;
     }
 
-    public void setCredit_card(integer credit_card) {
+    public void setCredit_card(Integer credit_card) {
         this.credit_card = credit_card;
     }
 
-    public string getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(string password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -51,8 +51,8 @@ public class Customer {
     public String toString() {
         return "Customer{" + "username=" + username + ", name=" + name + '}';
     }
-    
-    
+
+ 
     
     
 }
