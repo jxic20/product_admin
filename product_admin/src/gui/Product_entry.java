@@ -17,6 +17,7 @@ public class Product_entry extends javax.swing.JDialog {
     public Product_entry(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        txtCategory.setEditable(true);
     }
 
     /**
@@ -36,13 +37,13 @@ public class Product_entry extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDesc = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
-        txtCategory = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtPrice = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtStock = new javax.swing.JTextField();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        txtCategory = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -75,8 +76,15 @@ public class Product_entry extends javax.swing.JDialog {
         });
 
         saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         cancelButton.setText("Cancel");
+
+        txtCategory.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,9 +106,9 @@ public class Product_entry extends javax.swing.JDialog {
                             .addComponent(txtID)
                             .addComponent(txtName)
                             .addComponent(jScrollPane1)
-                            .addComponent(txtCategory)
                             .addComponent(txtPrice)
-                            .addComponent(txtStock)))
+                            .addComponent(txtStock)
+                            .addComponent(txtCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -152,6 +160,17 @@ public class Product_entry extends javax.swing.JDialog {
     private void txtStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStockActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStockActionPerformed
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        // TODO add your handling code here:
+        int txt_ID = Integer.valueOf(txtID.getText());
+        String txt_Name = txtName.getText();
+        String txt_Desc = txtDesc.getText();
+        String txt_Category = (String) txtCategory.getSelectedItem();
+        double txt_Price = Double.valueOf(txtPrice.getText());
+        int txt_Stock = Integer.valueOf(txtStock.getText());
+        //System.out.println(txt_ID +" "+ txt_Name + " " + txt_Desc + " " + txt_Category + " " + txt_Price + " " + txt_Stock);
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,7 +224,7 @@ public class Product_entry extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton saveButton;
-    private javax.swing.JTextField txtCategory;
+    private javax.swing.JComboBox txtCategory;
     private javax.swing.JTextArea txtDesc;
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtName;
