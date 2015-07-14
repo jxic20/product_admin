@@ -5,6 +5,8 @@
  */
 package gui;
 
+import domain.Product;
+
 /**
  *
  * @author monvi967
@@ -169,7 +171,16 @@ public class Product_entry extends javax.swing.JDialog {
         String txt_Category = (String) txtCategory.getSelectedItem();
         double txt_Price = Double.valueOf(txtPrice.getText());
         int txt_Stock = Integer.valueOf(txtStock.getText());
-        //System.out.println(txt_ID +" "+ txt_Name + " " + txt_Desc + " " + txt_Category + " " + txt_Price + " " + txt_Stock);
+        
+        Product product = new Product();
+        product.setProduct_ID(txt_ID);
+        product.setName(txt_Name);
+        product.setDescription(txt_Desc);
+        product.setCategory(txt_Category);
+        product.setPrice(txt_Price);
+        product.setStock_quantity(txt_Stock);
+        
+        //System.out.println(product.product_ID +" "+ product.name);
     }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
