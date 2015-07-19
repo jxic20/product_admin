@@ -91,6 +91,9 @@ public class Main_menu extends javax.swing.JFrame {
 
     private void addProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductButtonActionPerformed
         // TODO add your handling code here:
+        Product_entry productEntryDialog = new Product_entry(this, true);
+        productEntryDialog.setLocationRelativeTo(this);
+        productEntryDialog.setVisible(true);
         
     }//GEN-LAST:event_addProductButtonActionPerformed
 
