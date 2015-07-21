@@ -16,13 +16,19 @@ import java.util.ArrayList;
  */
 public class Products_list {
     private static ArrayList<Product> productList = new ArrayList();
+    private static ArrayList<String> categoryList = new ArrayList();
     
     public void add(Product pdt){
         productList.add(pdt);
+        categoryList.add(pdt.getCategory());
     }
     
-    public ArrayList<Product> getProductList(){
+    public ArrayList<Product> get(){
         return productList;
+    }
+    
+    public ArrayList<String> getCategories(){
+        return categoryList;
     }
     
 }

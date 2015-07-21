@@ -5,18 +5,31 @@
  */
 package gui;
 
+import dao.Products_list;
+import domain.Product;
+import gui.helpers.SimpleListModel;
+import java.util.ArrayList;
+
 /**
  *
  * @author monvi967
  */
 public class Product_report extends javax.swing.JDialog {
-
+     SimpleListModel productDisplay = new SimpleListModel();
+     
+     
+     Products_list products = new Products_list();
+     
     /**
      * Creates new form Product_report
      */
     public Product_report(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        productDisplay.updateItems(products.get());
+        productDisplay.updateItems(products.getCategories());
+        listProducts.setModel(productDisplay);
+        categoryComboBox.setModel(productDisplay);
     }
 
     /**
@@ -29,17 +42,19 @@ public class Product_report extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        listProducts = new javax.swing.JList();
         exitReport = new javax.swing.JButton();
+        categoryComboBox = new javax.swing.JComboBox();
+        categoryLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        listProducts.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(listProducts);
 
         exitReport.setText("Close");
         exitReport.addActionListener(new java.awt.event.ActionListener() {
@@ -48,24 +63,36 @@ public class Product_report extends javax.swing.JDialog {
             }
         });
 
+        categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        categoryLabel.setText("Category");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 254, Short.MAX_VALUE)
-                        .addComponent(exitReport)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(exitReport))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(categoryLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(categoryLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(exitReport)
                 .addGap(5, 5, 5))
@@ -122,8 +149,10 @@ public class Product_report extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox categoryComboBox;
+    private javax.swing.JLabel categoryLabel;
     private javax.swing.JButton exitReport;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList listProducts;
     // End of variables declaration//GEN-END:variables
 }
