@@ -6,12 +6,14 @@
 package gui;
 
 import domain.Product;
+import dao.Products_list;
 
 /**
  *
  * @author monvi967
  */
 public class Product_entry extends javax.swing.JDialog {
+    public Products_list productList = new Products_list();
 
     /**
      * Creates new form Product_entry
@@ -173,12 +175,15 @@ public class Product_entry extends javax.swing.JDialog {
         int txt_Stock = Integer.valueOf(txtStock.getText());
         
         Product product = new Product();
+        
         product.setProduct_ID(txt_ID);
         product.setName(txt_Name);
         product.setDescription(txt_Desc);
         product.setCategory(txt_Category);
         product.setPrice(txt_Price);
         product.setStock_quantity(txt_Stock);
+        
+        productList.add(product);
         
         //System.out.println(product.product_ID +" "+ product.name);
     }//GEN-LAST:event_saveButtonActionPerformed

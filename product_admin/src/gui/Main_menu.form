@@ -27,11 +27,9 @@
               <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="exitMainMenu" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="viewProductButton" max="32767" attributes="0"/>
-                      <Component id="addProductButton" max="32767" attributes="0"/>
-                      <Component id="mainLabel" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="viewProductButton" max="32767" attributes="0"/>
+                  <Component id="addProductButton" max="32767" attributes="0"/>
+                  <Component id="mainLabel" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="128" max="32767" attributes="0"/>
           </Group>
