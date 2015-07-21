@@ -5,6 +5,8 @@
  */
 package gui;
 
+
+
 /**
  *
  * @author Jvic
@@ -45,6 +47,11 @@ public class Main_menu extends javax.swing.JFrame {
         });
 
         viewProductButton.setText("View Products");
+        viewProductButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewProductButtonActionPerformed(evt);
+            }
+        });
 
         exitMainMenu.setText("Exit");
         exitMainMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -61,10 +68,9 @@ public class Main_menu extends javax.swing.JFrame {
                 .addGap(128, 128, 128)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(exitMainMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(viewProductButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addProductButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(mainLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(viewProductButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addProductButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mainLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(128, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -96,6 +102,13 @@ public class Main_menu extends javax.swing.JFrame {
         productEntryDialog.setVisible(true);
         
     }//GEN-LAST:event_addProductButtonActionPerformed
+
+    private void viewProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewProductButtonActionPerformed
+        // TODO add your handling code here:
+        Product_report productReportDialog = new Product_report(this, true);
+        productReportDialog.setLocationRelativeTo(this);
+        productReportDialog.setVisible(true);
+    }//GEN-LAST:event_viewProductButtonActionPerformed
 
     /**
      * @param args the command line arguments
