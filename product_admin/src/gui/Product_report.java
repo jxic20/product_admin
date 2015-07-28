@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 public class Product_report extends javax.swing.JDialog {
      SimpleListModel productDisplay = new SimpleListModel();
      SimpleListModel categoryDisplay = new SimpleListModel();
-     
+     Product selectedProduct = new Product();
      Products_list products = new Products_list();
      
     /**
@@ -48,6 +48,7 @@ public class Product_report extends javax.swing.JDialog {
         categoryComboBox = new javax.swing.JComboBox();
         categoryLabel = new javax.swing.JLabel();
         deleteButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -76,6 +77,8 @@ public class Product_report extends javax.swing.JDialog {
             }
         });
 
+        editButton.setText("Edit");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,7 +88,8 @@ public class Product_report extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(editButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(deleteButton)
                         .addGap(67, 67, 67)
                         .addComponent(exitReport))
@@ -107,7 +111,8 @@ public class Product_report extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(exitReport)
-                    .addComponent(deleteButton))
+                    .addComponent(deleteButton)
+                    .addComponent(editButton))
                 .addGap(5, 5, 5))
         );
 
@@ -185,6 +190,7 @@ public class Product_report extends javax.swing.JDialog {
     private javax.swing.JComboBox categoryComboBox;
     private javax.swing.JLabel categoryLabel;
     private javax.swing.JButton deleteButton;
+    private javax.swing.JButton editButton;
     private javax.swing.JButton exitReport;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList listProducts;

@@ -13,15 +13,24 @@ import dao.Products_list;
  * @author monvi967
  */
 public class Product_entry extends javax.swing.JDialog {
-    public Products_list productList = new Products_list();
+private Products_list productList = new Products_list();
+private Product  product = new Product();
 
     /**
      * Creates new form Product_entry
      */
-    public Product_entry(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public Product_entry(java.awt.Window parent, boolean modal) {
+        super(parent);
+        setModal(modal);
         initComponents();
         txtCategory.setEditable(true);
+    }
+    
+    public Product_entry(java.awt.Window parent, boolean modal, Product pdt) {
+        this(parent, modal);
+        this.product = pdt;
+        
+        this.txtID.setText(product.getProduct_ID().toString());
     }
 
     /**
@@ -174,7 +183,7 @@ public class Product_entry extends javax.swing.JDialog {
         double txt_Price = Double.valueOf(txtPrice.getText());
         int txt_Stock = Integer.valueOf(txtStock.getText());
         
-        Product product = new Product();
+        
         
         product.setProduct_ID(txt_ID);
         product.setName(txt_Name);
