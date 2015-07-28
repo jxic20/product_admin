@@ -23,6 +23,12 @@ public class Products_list{
         categoryList.add(pdt.getCategory());
     }
     
+    public void delete(Product pdt){
+        productList.remove(pdt);
+        categoryList.remove(pdt.getCategory());
+    }
+    
+    
     public Collection<Product> get(){
         return productList;
     }

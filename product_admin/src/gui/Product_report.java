@@ -9,6 +9,7 @@ import dao.Products_list;
 import domain.Product;
 import gui.helpers.SimpleListModel;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,6 +47,7 @@ public class Product_report extends javax.swing.JDialog {
         exitReport = new javax.swing.JButton();
         categoryComboBox = new javax.swing.JComboBox();
         categoryLabel = new javax.swing.JLabel();
+        deleteButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -67,6 +69,13 @@ public class Product_report extends javax.swing.JDialog {
 
         categoryLabel.setText("Category");
 
+        deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,6 +86,8 @@ public class Product_report extends javax.swing.JDialog {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(deleteButton)
+                        .addGap(67, 67, 67)
                         .addComponent(exitReport))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(categoryLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -94,7 +105,9 @@ public class Product_report extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(exitReport)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(exitReport)
+                    .addComponent(deleteButton))
                 .addGap(5, 5, 5))
         );
 
@@ -105,6 +118,26 @@ public class Product_report extends javax.swing.JDialog {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_exitReportActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+       if (listProducts.isSelectionEmpty() == true) {
+            return;
+        }
+
+        Product selectedProduct = (Product) listProducts.getSelectedValue();
+        int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this?");
+
+        if (result == JOptionPane.YES_OPTION) {
+            products.delete(selectedProduct);
+        }
+        productDisplay.updateItems(products.get());
+        categoryDisplay.updateItems(products.getCategories());
+        listProducts.setModel(productDisplay);
+        categoryComboBox.setModel(categoryDisplay);
+        
+        
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,6 +184,7 @@ public class Product_report extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox categoryComboBox;
     private javax.swing.JLabel categoryLabel;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JButton exitReport;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList listProducts;
