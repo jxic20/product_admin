@@ -8,26 +8,26 @@
 package dao;
 
 import domain.Product;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  *
  * @author monvi967
  */
-public class Products_list {
-    private static ArrayList<Product> productList = new ArrayList();
-    private static ArrayList<String> categoryList = new ArrayList();
+public class Products_list{
+    private static Collection<Product>  productList = new TreeSet();
+    private static Collection<String> categoryList = new TreeSet();
     
     public void add(Product pdt){
         productList.add(pdt);
         categoryList.add(pdt.getCategory());
     }
     
-    public ArrayList<Product> get(){
+    public Collection<Product> get(){
         return productList;
     }
     
-    public ArrayList<String> getCategories(){
+    public Collection<String> getCategories(){
         return categoryList;
     }
     

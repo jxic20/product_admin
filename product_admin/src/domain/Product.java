@@ -5,17 +5,28 @@
  */
 package domain;
 
+
 /**
  *
  * @author monvi967
  */
-public class Product {
+public class Product implements Comparable<Product>{
     public Integer product_ID;
     public String name;
     public String description;
     public String category;
     public Double price;
     public Integer stock_quantity;
+    
+    /*compare method*/
+    @Override
+    public int compareTo(Product anotherProduct){
+        Integer a = this.getProduct_ID();
+        Integer b = anotherProduct.getProduct_ID();
+        return a.compareTo(b);
+    }
+    
+    
 
     public Integer getProduct_ID() {
         return product_ID;

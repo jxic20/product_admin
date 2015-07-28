@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class Product_report extends javax.swing.JDialog {
      SimpleListModel productDisplay = new SimpleListModel();
-     
+     SimpleListModel categoryDisplay = new SimpleListModel();
      
      Products_list products = new Products_list();
      
@@ -27,9 +27,9 @@ public class Product_report extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         productDisplay.updateItems(products.get());
-        productDisplay.updateItems(products.getCategories());
+        categoryDisplay.updateItems(products.getCategories());
         listProducts.setModel(productDisplay);
-        categoryComboBox.setModel(productDisplay);
+        categoryComboBox.setModel(categoryDisplay);
     }
 
     /**
