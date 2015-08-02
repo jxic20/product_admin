@@ -31,6 +31,15 @@ private Product  product = new Product();
         this.product = pdt;
         
         this.txtID.setText(product.getProduct_ID().toString());
+        this.txtName.setText(product.getName());
+        this.txtDesc.setText(product.getDescription());
+        this.txtCategory.setSelectedItem(product.getCategory());
+        this.txtPrice.setText(product.getPrice().toString());
+        this.txtStock.setText(product.getStock_quantity().toString());
+        
+        this.txtID.setEditable(false);
+        
+        
     }
 
     /**

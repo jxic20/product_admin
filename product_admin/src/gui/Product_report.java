@@ -78,6 +78,11 @@ public class Product_report extends javax.swing.JDialog {
         });
 
         editButton.setText("Edit");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,7 +135,7 @@ public class Product_report extends javax.swing.JDialog {
             return;
         }
 
-        Product selectedProduct = (Product) listProducts.getSelectedValue();
+        selectedProduct = (Product) listProducts.getSelectedValue();
         int result = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this?");
 
         if (result == JOptionPane.YES_OPTION) {
@@ -143,6 +148,15 @@ public class Product_report extends javax.swing.JDialog {
         
         
     }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        // TODO add your handling code here:
+        selectedProduct = (Product) listProducts.getSelectedValue();
+        Product_entry productEntry = new Product_entry(this, true, selectedProduct);
+        productEntry.setVisible(true);
+        productDisplay.updateItems(products.get());
+        categoryDisplay.updateItems(products.getCategories());
+    }//GEN-LAST:event_editButtonActionPerformed
 
     /**
      * @param args the command line arguments
