@@ -8,7 +8,7 @@ package gui;
 import dao.Products_list;
 import domain.Product;
 import gui.helpers.SimpleListModel;
-import java.util.ArrayList;
+import java.util.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +23,8 @@ public class Product_report extends javax.swing.JDialog {
      
     /**
      * Creates new form Product_report
+     * @param parent
+     * @param modal
      */
     public Product_report(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -70,6 +72,11 @@ public class Product_report extends javax.swing.JDialog {
         });
 
         categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        categoryComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoryComboBoxActionPerformed(evt);
+            }
+        });
 
         categoryLabel.setText("Category");
 
@@ -200,6 +207,13 @@ public class Product_report extends javax.swing.JDialog {
         }
         return;
     }//GEN-LAST:event_searchIDbuttonActionPerformed
+
+    private void categoryComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryComboBoxActionPerformed
+        // TODO add your handling code here:
+        Set<Product> pdts = products.getCatSet((String) categoryComboBox.getSelectedItem());
+        productDisplay.updateItems(pdts);
+        categoryDisplay.updateItems(pdts);
+    }//GEN-LAST:event_categoryComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
