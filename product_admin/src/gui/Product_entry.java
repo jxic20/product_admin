@@ -5,6 +5,7 @@
  */
 package gui;
 
+
 import domain.Product;
 import dao.Products_list;
 
@@ -191,8 +192,6 @@ private Product  product = new Product();
         String txt_Category = (String) txtCategory.getSelectedItem();
         double txt_Price = Double.valueOf(txtPrice.getText());
         int txt_Stock = Integer.valueOf(txtStock.getText());
-        
-        
         
         product.setProduct_ID(txt_ID);
         product.setName(txt_Name);
