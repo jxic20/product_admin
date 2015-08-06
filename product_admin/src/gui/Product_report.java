@@ -31,7 +31,7 @@ public class Product_report extends javax.swing.JDialog {
         initComponents();
         
         productDisplay.updateItems(products.get());
-        categoryDisplay.updateItems(products.getKS());
+        categoryDisplay.updateItems(products.getCategories());
         
         listProducts.setModel(productDisplay);
         categoryComboBox.setModel(categoryDisplay);
@@ -190,7 +190,7 @@ public class Product_report extends javax.swing.JDialog {
             products.delete(selectedProduct);
         }
         productDisplay.updateItems(products.get());
-        categoryDisplay.updateItems(products.getKS());
+        categoryDisplay.updateItems(products.getCategories());
         listProducts.setModel(productDisplay);
         categoryComboBox.setModel(categoryDisplay);
         
@@ -205,10 +205,12 @@ public class Product_report extends javax.swing.JDialog {
             productEntry.setLocationRelativeTo(this);
             productEntry.setVisible(true);
             
-            Product_entry.selcat = "non";
-            System.out.println("kjsvhkajdfbgk");
+            System.out.println("report edit Finish " + Product_entry.selcat);
+            Product_entry.selcat = null;
+            System.out.println("report selcat set to non " + Product_entry.selcat);
+            
             productDisplay.updateItems(products.get());
-            categoryDisplay.updateItems(products.getKS());
+            categoryDisplay.updateItems(products.getCategories());
         }
     }//GEN-LAST:event_editButtonActionPerformed
 
@@ -221,7 +223,7 @@ public class Product_report extends javax.swing.JDialog {
         Product pdt = products.search_by_ID(Integer.valueOf(searchTextField.getText()));
         if(pdt != null){
             productDisplay.updateItems(pdt);
-            categoryDisplay.updateItems(products.getKS());
+            categoryDisplay.updateItems(products.getCategories());
             listProducts.setModel(productDisplay);
             categoryComboBox.setModel(categoryDisplay);
         }
@@ -235,12 +237,10 @@ public class Product_report extends javax.swing.JDialog {
             productDisplay.updateItems(pdts);
             listProducts.setModel(productDisplay);
         }
-        if(pdts == null){
-            productDisplay.updateItems(null);
-        }
-        
+
         //categoryComboBox.setModel(categoryDisplay);
-        categoryDisplay.updateItems(products.getKS());
+        productDisplay.updateItems(pdts);
+        categoryDisplay.updateItems(products.getCategories());
     }//GEN-LAST:event_categoryComboBoxActionPerformed
 
     private void categoryComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_categoryComboBoxItemStateChanged

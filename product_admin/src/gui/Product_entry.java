@@ -18,7 +18,8 @@ public class Product_entry extends javax.swing.JDialog {
 
 private Products_list productList = new Products_list();
 private Product  product = new Product();
-public static String selcat = "non";
+public static String selcat ;
+public static Product p = new Product();
 
     /**
      * Creates new form Product_entry
@@ -42,6 +43,7 @@ public static String selcat = "non";
         this.txtDesc.setText(product.getDescription());
         this.txtCategory.setSelectedItem(product.getCategory());
         selcat = product.getCategory();
+        p = pdt;
         this.txtPrice.setText(product.getPrice().toString());
         this.txtStock.setText(product.getStock_quantity().toString());
         
