@@ -9,6 +9,7 @@ package dao;
 
 import domain.Product;
 import java.util.*;
+import gui.Product_entry;
 
 /**
  *
@@ -16,21 +17,42 @@ import java.util.*;
  */
 public class Products_list{
     private static Collection<Product>  productList = new TreeSet();
-    private static Collection<String> categoryList = new TreeSet();
+    //private static Collection<String> categoryList = new TreeSet();
     private static Map<Integer, Product> productIDList = new HashMap();
     private static Map<String, Set<Product>> productCatSet = new HashMap();
     
     
     /*adding products to Category Set*/
-    public void addToSet(Product pdt){
+    public void addToSet(Product pdt, Integer id){
         String cat = pdt.getCategory();
-        if (productCatSet.get(cat) != null){
-           (productCatSet.get(cat)).add(pdt);
-        } else {
-            Set<Product> newPSet = new HashSet();
+        Set<Product> newPSet = new HashSet();
+        
+        if ((productCatSet.get(cat)) == null){
             newPSet.add(pdt);
             productCatSet.put(pdt.getCategory(), newPSet);
+            if((!"non".equals(Product_entry.selcat)) /*|| !pdt.getCategory().equals(Product_entry.selcat)*/){
+                productCatSet.remove(Product_entry.selcat);
+                Product_entry.selcat = "non";
+                
+                
+                
+                
+            }
+        } else {
+            (productCatSet.get(cat)).add(pdt);
         }
+    }
+    
+    public Set<String> getKS(){
+        
+        return productCatSet.keySet();
+    }
+    
+    public void deleteFromCat(Product pdt){
+        //(productCatSet.get(pdt.getCategory())).remove(pdt);
+        //if( productCatSet.get(pdt.getCategory()) == null){
+        //    productCatSet.remove(pdt.getCategory());
+        //}
     }
     
     /*retrieving products from category set via category name*/
@@ -40,15 +62,18 @@ public class Products_list{
     
     public void add(Product pdt){
         productList.add(pdt);
-        categoryList.add(pdt.getCategory());
+        addToSet(pdt, pdt.getProduct_ID());
+        //categoryList.add(pdt.getCategory());
         productIDList.put(pdt.getProduct_ID(), pdt);
-        addToSet(pdt);
+        
     }
     
     public void delete(Product pdt){
         productList.remove(pdt);
-        categoryList.remove(pdt.getCategory());
+        //categoryList.remove(pdt.getCategory());
         productIDList.remove(pdt.getProduct_ID());
+        //deleteFromCat(pdt);
+        
     }
     
     public Product search_by_ID(Integer id){
@@ -64,9 +89,9 @@ public class Products_list{
         return productList;
     }
     
-    public Collection<String> getCategories(){
-        return categoryList;
-    }
+    //public Collection<String> getCategories(){
+    //    return categoryList;
+    //}
     
     public Map<Integer, Product> getProduct_IDs(){
         return productIDList;

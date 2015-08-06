@@ -9,22 +9,28 @@ package gui;
 import domain.Product;
 import dao.Products_list;
 
+
 /**
  *
  * @author monvi967
  */
 public class Product_entry extends javax.swing.JDialog {
+
 private Products_list productList = new Products_list();
 private Product  product = new Product();
+public static String selcat = "non";
 
     /**
      * Creates new form Product_entry
+     * @param parent
+     * @param modal
      */
     public Product_entry(java.awt.Window parent, boolean modal) {
         super(parent);
         setModal(modal);
         initComponents();
         txtCategory.setEditable(true);
+
     }
     
     public Product_entry(java.awt.Window parent, boolean modal, Product pdt) {
@@ -35,8 +41,11 @@ private Product  product = new Product();
         this.txtName.setText(product.getName());
         this.txtDesc.setText(product.getDescription());
         this.txtCategory.setSelectedItem(product.getCategory());
+        selcat = product.getCategory();
         this.txtPrice.setText(product.getPrice().toString());
         this.txtStock.setText(product.getStock_quantity().toString());
+        
+        
         
         this.txtID.setEditable(false);
         
@@ -106,6 +115,11 @@ private Product  product = new Product();
         });
 
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         txtCategory.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -186,6 +200,8 @@ private Product  product = new Product();
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
+        
+        
         int txt_ID = Integer.valueOf(txtID.getText());
         String txt_Name = txtName.getText();
         String txt_Desc = txtDesc.getText();
@@ -193,17 +209,26 @@ private Product  product = new Product();
         double txt_Price = Double.valueOf(txtPrice.getText());
         int txt_Stock = Integer.valueOf(txtStock.getText());
         
-        product.setProduct_ID(txt_ID);
-        product.setName(txt_Name);
-        product.setDescription(txt_Desc);
-        product.setCategory(txt_Category);
-        product.setPrice(txt_Price);
-        product.setStock_quantity(txt_Stock);
+        //productList.deleteFromCat(this.product);//so that editing doesnt make still have old pdt
         
-        productList.add(product);
+        this.product.setProduct_ID(txt_ID);
+        this.product.setName(txt_Name);
+        this.product.setDescription(txt_Desc);
+        this.product.setCategory(txt_Category);
+        this.product.setPrice(txt_Price);
+        this.product.setStock_quantity(txt_Stock);
+        
+        productList.add(this.product);
+        //productList.addToSet(this.product);
+        dispose();
         
         //System.out.println(product.product_ID +" "+ product.name);
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
      * @param args the command line arguments

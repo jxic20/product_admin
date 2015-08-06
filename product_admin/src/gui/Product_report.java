@@ -29,8 +29,10 @@ public class Product_report extends javax.swing.JDialog {
     public Product_report(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
         productDisplay.updateItems(products.get());
-        categoryDisplay.updateItems(products.getCategories());
+        categoryDisplay.updateItems(products.getKS());
+        
         listProducts.setModel(productDisplay);
         categoryComboBox.setModel(categoryDisplay);
     }
@@ -72,6 +74,16 @@ public class Product_report extends javax.swing.JDialog {
         });
 
         categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        categoryComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                categoryComboBoxItemStateChanged(evt);
+            }
+        });
+        categoryComboBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                categoryComboBoxMouseClicked(evt);
+            }
+        });
         categoryComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 categoryComboBoxActionPerformed(evt);
@@ -178,7 +190,7 @@ public class Product_report extends javax.swing.JDialog {
             products.delete(selectedProduct);
         }
         productDisplay.updateItems(products.get());
-        categoryDisplay.updateItems(products.getCategories());
+        categoryDisplay.updateItems(products.getKS());
         listProducts.setModel(productDisplay);
         categoryComboBox.setModel(categoryDisplay);
         
@@ -188,10 +200,16 @@ public class Product_report extends javax.swing.JDialog {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
         selectedProduct = (Product) listProducts.getSelectedValue();
-        Product_entry productEntry = new Product_entry(this, true, selectedProduct);
-        productEntry.setVisible(true);
-        productDisplay.updateItems(products.get());
-        categoryDisplay.updateItems(products.getCategories());
+        if(selectedProduct != null){
+            Product_entry productEntry = new Product_entry(this, true, selectedProduct);
+            productEntry.setLocationRelativeTo(this);
+            productEntry.setVisible(true);
+            
+            Product_entry.selcat = "non";
+            System.out.println("kjsvhkajdfbgk");
+            productDisplay.updateItems(products.get());
+            categoryDisplay.updateItems(products.getKS());
+        }
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void searchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTextFieldActionPerformed
@@ -203,7 +221,9 @@ public class Product_report extends javax.swing.JDialog {
         Product pdt = products.search_by_ID(Integer.valueOf(searchTextField.getText()));
         if(pdt != null){
             productDisplay.updateItems(pdt);
-            categoryDisplay.updateItems(pdt.getCategory());
+            categoryDisplay.updateItems(products.getKS());
+            listProducts.setModel(productDisplay);
+            categoryComboBox.setModel(categoryDisplay);
         }
         return;
     }//GEN-LAST:event_searchIDbuttonActionPerformed
@@ -211,9 +231,28 @@ public class Product_report extends javax.swing.JDialog {
     private void categoryComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryComboBoxActionPerformed
         // TODO add your handling code here:
         Set<Product> pdts = products.getCatSet((String) categoryComboBox.getSelectedItem());
-        productDisplay.updateItems(pdts);
-        categoryDisplay.updateItems(pdts);
+        if(pdts != null){
+            productDisplay.updateItems(pdts);
+            listProducts.setModel(productDisplay);
+        }
+        if(pdts == null){
+            productDisplay.updateItems(null);
+        }
+        
+        //categoryComboBox.setModel(categoryDisplay);
+        categoryDisplay.updateItems(products.getKS());
     }//GEN-LAST:event_categoryComboBoxActionPerformed
+
+    private void categoryComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_categoryComboBoxItemStateChanged
+        // TODO add your handling code here:
+       
+
+    }//GEN-LAST:event_categoryComboBoxItemStateChanged
+
+    private void categoryComboBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categoryComboBoxMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_categoryComboBoxMouseClicked
 
     /**
      * @param args the command line arguments
