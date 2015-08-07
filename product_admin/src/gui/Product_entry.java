@@ -9,6 +9,7 @@ package gui;
 import dao.Products_database_management;
 import domain.Product;
 import gui.helpers.SimpleListModel;
+import javax.swing.JOptionPane;
 //import dao.Products_list;
 
 
@@ -35,6 +36,7 @@ private Product  product = new Product();
         initComponents();
         txtCategory.setEditable(true);
         categoryDisplay.updateItems(productList.getCategories());
+        
         txtCategory.setModel(categoryDisplay);
 
     }
@@ -208,6 +210,12 @@ private Product  product = new Product();
         
         
         int txt_ID = Integer.valueOf(txtID.getText());
+        
+        if(productList.search_by_ID(txt_ID) != null){
+            JOptionPane.showMessageDialog(null, "This ID is already in use", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+
+            return;
+        }
         String txt_Name = txtName.getText();
         String txt_Desc = txtDesc.getText();
         String txt_Category = (String) txtCategory.getSelectedItem();
