@@ -5,7 +5,8 @@
  */
 package gui;
 
-import dao.Products_list;
+import dao.Products_database_management;
+//import dao.Products_list;
 import domain.Product;
 import gui.helpers.SimpleListModel;
 import java.util.*;
@@ -19,7 +20,8 @@ public class Product_report extends javax.swing.JDialog {
      SimpleListModel productDisplay = new SimpleListModel();
      SimpleListModel categoryDisplay = new SimpleListModel();
      Product selectedProduct = new Product();
-     Products_list products = new Products_list();
+     Products_database_management products = new Products_database_management();
+     
      
     /**
      * Creates new form Product_report
@@ -30,11 +32,22 @@ public class Product_report extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
+        
+        
         productDisplay.updateItems(products.get());
         categoryDisplay.updateItems(products.getCategories());
-        
         listProducts.setModel(productDisplay);
         categoryComboBox.setModel(categoryDisplay);
+        categoryComboBox.addItem("all");
+        if(categoryComboBox.getSelectedItem() == null){
+            categoryComboBox.setSelectedItem("all");
+        }
+        if(categoryComboBox.getSelectedItem() == "all"){
+            productDisplay.updateItems(products.get());
+        }
+        
+        
+        
     }
 
     /**
@@ -205,9 +218,9 @@ public class Product_report extends javax.swing.JDialog {
             productEntry.setLocationRelativeTo(this);
             productEntry.setVisible(true);
             
-            System.out.println("report edit Finish " + Product_entry.selcat);
-            Product_entry.selcat = null;
-            System.out.println("report selcat set to non " + Product_entry.selcat);
+            //System.out.println("report edit Finish " + Product_entry.selcat);
+           // Product_entry.selcat = null;
+            //System.out.println("report selcat set to non " + Product_entry.selcat);
             
             productDisplay.updateItems(products.get());
             categoryDisplay.updateItems(products.getCategories());
@@ -224,8 +237,7 @@ public class Product_report extends javax.swing.JDialog {
         if(pdt != null){
             productDisplay.updateItems(pdt);
             categoryDisplay.updateItems(products.getCategories());
-            listProducts.setModel(productDisplay);
-            categoryComboBox.setModel(categoryDisplay);
+            
         }
         return;
     }//GEN-LAST:event_searchIDbuttonActionPerformed
@@ -233,6 +245,7 @@ public class Product_report extends javax.swing.JDialog {
     private void categoryComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryComboBoxActionPerformed
         // TODO add your handling code here:
         Set<Product> pdts = products.getCatSet((String) categoryComboBox.getSelectedItem());
+        
         if(pdts != null){
             productDisplay.updateItems(pdts);
             listProducts.setModel(productDisplay);

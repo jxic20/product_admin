@@ -6,8 +6,10 @@
 package gui;
 
 
+import dao.Products_database_management;
 import domain.Product;
-import dao.Products_list;
+import gui.helpers.SimpleListModel;
+//import dao.Products_list;
 
 
 /**
@@ -15,11 +17,12 @@ import dao.Products_list;
  * @author monvi967
  */
 public class Product_entry extends javax.swing.JDialog {
-
-private Products_list productList = new Products_list();
+private SimpleListModel categoryDisplay = new SimpleListModel();
+private Products_database_management productList = new Products_database_management();
+//private Products_database_management productList2 = new Products_database_management();
 private Product  product = new Product();
-public static String selcat ;
-public static Product p = new Product();
+//public static String selcat ;
+//public static Product p = new Product();
 
     /**
      * Creates new form Product_entry
@@ -31,6 +34,8 @@ public static Product p = new Product();
         setModal(modal);
         initComponents();
         txtCategory.setEditable(true);
+        categoryDisplay.updateItems(productList.getCategories());
+        txtCategory.setModel(categoryDisplay);
 
     }
     
@@ -42,8 +47,6 @@ public static Product p = new Product();
         this.txtName.setText(product.getName());
         this.txtDesc.setText(product.getDescription());
         this.txtCategory.setSelectedItem(product.getCategory());
-        selcat = product.getCategory();
-        p = pdt;
         this.txtPrice.setText(product.getPrice().toString());
         this.txtStock.setText(product.getStock_quantity().toString());
         
@@ -221,6 +224,7 @@ public static Product p = new Product();
         this.product.setStock_quantity(txt_Stock);
         
         productList.add(this.product);
+        //productList2.add(this.product);
         //productList.addToSet(this.product);
         dispose();
         
