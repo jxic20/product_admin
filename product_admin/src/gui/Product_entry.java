@@ -212,6 +212,8 @@ private Product  product = new Product();
         int txt_ID = Integer.valueOf(txtID.getText());
         
         if(productList.search_by_ID(txt_ID) != null){
+            
+            System.out.println(productList.search_by_ID(txt_ID));
             JOptionPane.showMessageDialog(null, "This ID is already in use", "ERROR", JOptionPane.INFORMATION_MESSAGE);
 
             return;

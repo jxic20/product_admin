@@ -176,7 +176,7 @@ public class Products_database_management implements Product_data{
                 stmt.setInt(1,id);
                 ResultSet rs = stmt.executeQuery();
                 Product p = new Product();
-                while(rs.next()){
+                if (rs.next()){
                     
                    Integer pid = rs.getInt("product_id");
                    String name = rs.getString("name");
@@ -192,10 +192,11 @@ public class Products_database_management implements Product_data{
                     p.price = price;
                     p.stock_quantity = stock;
                     
-    
-                }
+     return p;
+                }else{
+                    return null;}
                 
-                return p;
+               
             }catch (SQLException ex){
                 throw new RuntimeException(ex);
 

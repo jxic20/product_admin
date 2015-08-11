@@ -38,6 +38,7 @@ public class Product_report extends javax.swing.JDialog {
         categoryDisplay.updateItems(products.getCategories());
         listProducts.setModel(productDisplay);
         categoryComboBox.setModel(categoryDisplay);
+        
         categoryComboBox.addItem("all");
         if(categoryComboBox.getSelectedItem() == null){
             categoryComboBox.setSelectedItem("all");
