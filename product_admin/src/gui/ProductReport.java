@@ -5,7 +5,8 @@
  */
 package gui;
 
-import dao.Products_database_management;
+import dao.ProductCollectionsInterface;
+import dao.ProductsDatabaseManagement;
 //import dao.Products_list;
 import domain.Product;
 import gui.helpers.SimpleListModel;
@@ -16,11 +17,11 @@ import javax.swing.JOptionPane;
  *
  * @author monvi967
  */
-public class Product_report extends javax.swing.JDialog {
+public class ProductReport extends javax.swing.JDialog {
      SimpleListModel productDisplay = new SimpleListModel();
      SimpleListModel categoryDisplay = new SimpleListModel();
      Product selectedProduct = new Product();
-     Products_database_management products = new Products_database_management();
+     ProductCollectionsInterface products = new ProductsDatabaseManagement();
      
      
     /**
@@ -28,11 +29,11 @@ public class Product_report extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public Product_report(java.awt.Frame parent, boolean modal) {
+    public ProductReport(java.awt.Frame parent, boolean modal,ProductCollectionsInterface pdtList ) {
         super(parent, modal);
         initComponents();
         
-        
+        this.products = pdtList;
         
         productDisplay.updateItems(products.get());
         categoryDisplay.updateItems(products.getCategories());
@@ -215,7 +216,7 @@ public class Product_report extends javax.swing.JDialog {
         // TODO add your handling code here:
         selectedProduct = (Product) listProducts.getSelectedValue();
         if(selectedProduct != null){
-            Product_entry productEntry = new Product_entry(this, true, selectedProduct);
+            ProductEntry productEntry = new ProductEntry(this, true, selectedProduct, products);
             productEntry.setLocationRelativeTo(this);
             productEntry.setVisible(true);
             
@@ -268,47 +269,7 @@ public class Product_report extends javax.swing.JDialog {
 
     }//GEN-LAST:event_categoryComboBoxMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Product_report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Product_report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Product_report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Product_report.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Product_report dialog = new Product_report(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox categoryComboBox;

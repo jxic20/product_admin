@@ -5,6 +5,8 @@
  */
 package domain;
 
+import java.util.Objects;
+
 
 /**
  *
@@ -17,6 +19,30 @@ public class Product implements Comparable<Product>{
     public String category;
     public Double price;
     public Integer stock_quantity;
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 71 * hash + Objects.hashCode(this.product_ID);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Product other = (Product) obj;
+        if (!Objects.equals(this.product_ID, other.product_ID)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
     
     /*compare method*/
     @Override

@@ -12,7 +12,7 @@ import java.util.*;
  *
  * @author Jvic
  */
-public interface Product_data {
+public interface ProductCollectionsInterface {
     //private void addToSet(Product pdt);
     //private Set<String> getKS();   
     /*retrieving products from category set via category name*/

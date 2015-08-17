@@ -13,12 +13,12 @@ import java.util.*;
  *
  * @author Jvic
  */
-public class Products_database_management implements Product_data{
+public class ProductsDatabaseManagement implements ProductCollectionsInterface{
     String database_URL = "jdbc:h2:tcp://localhost/project;IFEXISTS=TRUE";
 
-    public Products_database_management() {
+    public ProductsDatabaseManagement() {
     }
-    public Products_database_management(String dt) {//to be continued
+    public ProductsDatabaseManagement(String dt) {//to be continued
     }
     
     @Override

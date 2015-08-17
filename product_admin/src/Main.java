@@ -1,5 +1,6 @@
 
-import gui.Main_menu;
+import dao.ProductsDatabaseManagement;
+import gui.MainMenu;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,7 +19,8 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Main_menu mainMenu = new Main_menu();
+        ProductsDatabaseManagement jdbcDAO = new ProductsDatabaseManagement();
+        MainMenu mainMenu = new MainMenu(jdbcDAO);
         mainMenu.setLocationRelativeTo(null);
         mainMenu.setVisible(true);
         

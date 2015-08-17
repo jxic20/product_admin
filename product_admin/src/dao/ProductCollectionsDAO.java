@@ -15,7 +15,7 @@ import java.util.*;
  *
  * @author monvi967
  */
-public class Products_list implements Product_data{
+public class ProductCollectionsDAO implements ProductCollectionsInterface{
 //    private static Collection<Product>  productList = new TreeSet();
 //    private static Collection<String> categoryList = new TreeSet();
     private static Map<Integer, Product> productIDList = new HashMap();

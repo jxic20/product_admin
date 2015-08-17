@@ -6,7 +6,8 @@
 package gui;
 
 
-import dao.Products_database_management;
+import dao.ProductCollectionsInterface;
+import dao.ProductsDatabaseManagement;
 import domain.Product;
 import gui.helpers.SimpleListModel;
 import javax.swing.JOptionPane;
@@ -17,9 +18,9 @@ import javax.swing.JOptionPane;
  *
  * @author monvi967
  */
-public class Product_entry extends javax.swing.JDialog {
+public class ProductEntry extends javax.swing.JDialog {
 private SimpleListModel categoryDisplay = new SimpleListModel();
-private Products_database_management productList = new Products_database_management();
+private ProductCollectionsInterface productList;
 //private Products_database_management productList2 = new Products_database_management();
 private Product  product = new Product();
 //public static String selcat ;
@@ -29,11 +30,13 @@ private Product  product = new Product();
      * Creates new form Product_entry
      * @param parent
      * @param modal
+     * @param pdtList
      */
-    public Product_entry(java.awt.Window parent, boolean modal) {
+    public ProductEntry(java.awt.Window parent, boolean modal,ProductCollectionsInterface pdtList ) {
         super(parent);
         setModal(modal);
         initComponents();
+        this.productList = pdtList;
         txtCategory.setEditable(true);
         categoryDisplay.updateItems(productList.getCategories());
         
@@ -41,8 +44,8 @@ private Product  product = new Product();
 
     }
     
-    public Product_entry(java.awt.Window parent, boolean modal, Product pdt) {
-        this(parent, modal);
+    public ProductEntry(java.awt.Window parent, boolean modal, Product pdt ,ProductCollectionsInterface pdtList) {
+        this(parent, modal, pdtList);
         this.product = pdt;
         
         this.txtID.setText(product.getProduct_ID().toString());
@@ -211,13 +214,14 @@ private Product  product = new Product();
         
         int txt_ID = Integer.valueOf(txtID.getText());
         
-        if(productList.search_by_ID(txt_ID) != null){
+        if(txtID.isEditable() != false && productList.search_by_ID(txt_ID) != null ){
             
             System.out.println(productList.search_by_ID(txt_ID));
             JOptionPane.showMessageDialog(null, "This ID is already in use", "ERROR", JOptionPane.INFORMATION_MESSAGE);
 
             return;
         }
+        
         String txt_Name = txtName.getText();
         String txt_Desc = txtDesc.getText();
         String txt_Category = (String) txtCategory.getSelectedItem();
@@ -246,47 +250,7 @@ private Product  product = new Product();
         dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Product_entry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Product_entry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Product_entry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Product_entry.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                Product_entry dialog = new Product_entry(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
