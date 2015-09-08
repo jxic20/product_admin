@@ -20,6 +20,8 @@ public class Product implements Comparable<Product>{
     public Double price;
     public Integer stock_quantity;
 
+
+
     @Override
     public int hashCode() {
         int hash = 5;
