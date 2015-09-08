@@ -14,7 +14,7 @@ import java.util.*;
  * @author Jvic
  */
 public class ProductsDatabaseManagement implements ProductCollectionsInterface{
-    String database_URL = "jdbc:h2:tcp://localhost/project-testing;IFEXISTS=TRUE";
+    String database_URL = "jdbc:h2:tcp://localhost/project;IFEXISTS=TRUE";
 
     public ProductsDatabaseManagement() {
     }
