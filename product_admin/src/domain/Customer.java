@@ -14,6 +14,27 @@ public class Customer {
     public String name;
     public Integer credit_card;
     public String password;
+    public String email;
+    public String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    
 
     public String getUsername() {
         return username;
