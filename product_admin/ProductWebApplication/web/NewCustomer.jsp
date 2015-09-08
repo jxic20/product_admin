@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Create an Account</h1>
-        <form action="POST" class="AccountForm">
+        <form method="POST" action="AccountServlet">
             <p>Account Details</p>
             
             <label for="UserCode">User Code</label>
