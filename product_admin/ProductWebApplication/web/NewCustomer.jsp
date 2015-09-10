@@ -16,7 +16,7 @@
         <form method="POST" action="AccountServlet">
             <p>Account Details</p>
             
-            <label for="UserCode">User Code</label>
+            <label for="UserCode">User Name</label>
             <input type="text" name="UserCode">
             <br>
             <label for="Name">Name</label>
@@ -35,7 +35,7 @@
             <input type="text" name="Password">
             <br>
             <br>
-            <input type="button" name="CreateButton" value="Create Account">
+            <input type="submit" name="CreateButton" value="Create Account">
             
         <form/>
         

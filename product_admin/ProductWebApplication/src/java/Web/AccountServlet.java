@@ -3,6 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package Web;
+
+import domain.Customer;
+import dao.CustomerCollectionsDAO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,8 +20,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Jvic
  */
-@WebServlet(urlPatterns = {"/AccountServlet"})
+@WebServlet(name = "AccountServlet", urlPatterns = {"/AccountServlet"})
 public class AccountServlet extends HttpServlet {
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,19 +35,27 @@ public class AccountServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AccountServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AccountServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+            CustomerCollectionsDAO customerList = new CustomerCollectionsDAO();
+
+            String userCode = request.getParameter("UserCode");
+            String userName = request.getParameter("Name");
+            String userEmail = request.getParameter("Email");
+            String userAddress = request.getParameter("Address");
+            Integer userCredit = Integer.parseInt(request.getParameter("Credit"));
+            String userPass = request.getParameter("Password");
+            
+            Customer cust = new Customer();
+            
+            cust.username = userCode;
+            cust.name = userName;
+            cust.email = userEmail;
+            cust.address = userAddress;
+            cust.setCredit_card(userCredit);
+            cust.password = userPass;
+            
+            customerList.save(cust);
+                
+            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
