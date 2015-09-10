@@ -13,11 +13,13 @@ import java.util.*;
  * @author Jvic
  */
 public class CustomerCollectionsDAO {
+    private static CustomerDatabaseManagement ctrDB = new CustomerDatabaseManagement();
     
     private static Set<Customer> customerCatSet = new HashSet();
     
     public void save(Customer ctr){
-        customerCatSet.add(ctr);
+        ctrDB.add(ctr);
         System.out.print(ctr.toString());
     }
+  
 }

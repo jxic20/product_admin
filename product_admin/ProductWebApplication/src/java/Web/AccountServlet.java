@@ -54,6 +54,7 @@ public class AccountServlet extends HttpServlet {
             cust.password = userPass;
             
             customerList.save(cust);
+            System.out.println("zcv");
             
                 
             
