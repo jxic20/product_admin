@@ -22,7 +22,7 @@
 
         %>
         <% 
-        
+            
             Collection<Product> pdtList = pdtDAO.get();
         
         %>
@@ -32,6 +32,9 @@
             <% 
                 for (Product pdt : pdtList){
                     String msg = "<input type='submit' name='"+pdt.getCategory()+"Button' + value='"+pdt.getCategory()+"' onclick='submit'>";
+                    %>
+                    <%=msg%>
+                    <%
                 }
             %>
      
