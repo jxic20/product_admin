@@ -5,6 +5,7 @@
  */
 package dao;
 
+import dao.JdbcConnection;
 import domain.Customer;
 import java.sql.*;
 import java.util.*;
