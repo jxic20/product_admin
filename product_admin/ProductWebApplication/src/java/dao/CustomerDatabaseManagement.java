@@ -45,6 +45,43 @@ public class CustomerDatabaseManagement{
             }
     }
     
+    public Collection<Customer> get(){
+        
+            String sql = "select * from customer order by customer_id";
+            try(
+                Connection dbCon= JdbcConnection.getConnection(database_URL); 
+                PreparedStatement stmt = dbCon.prepareStatement(sql);
+            ){
+                ResultSet rs = stmt.executeQuery();
+                Collection<Customer> ctr = new HashSet();
+                while(rs.next()){
+                    String id = rs.getString("customer_id");
+                    String name = rs.getString("name");
+                    String desc = rs.getString("email");
+                    String category = rs.getString("address");
+                    Integer price = rs.getInt("credit_card");
+                    String stock = rs.getString("password");
+                    
+                    Customer p = new Customer();
+                    
+                    p.username = id;
+                    p.name = name;
+                    p.email = desc;
+                    p.address = category;
+                    p.credit_card = price;
+                    p.password = stock;
+                    
+                    ctr.add(p); 
+                }
+                
+                return ctr;
+            }catch (SQLException ex){
+                throw new RuntimeException(ex);
+
+            }
+        
+    }
+    
 }
 
     

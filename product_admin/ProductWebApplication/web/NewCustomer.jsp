@@ -12,6 +12,7 @@
         <title>Account Creation</title>
     </head>
     <body>
+        <%@include file="/WEB-INF/jspf/navbar.jspf" %>
         <h1>Create an Account</h1>
         <form method="POST" action="AccountServlet">
             <p>Account Details</p>

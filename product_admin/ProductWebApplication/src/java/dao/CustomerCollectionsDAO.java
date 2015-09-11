@@ -21,5 +21,7 @@ public class CustomerCollectionsDAO {
         ctrDB.add(ctr);
         System.out.print(ctr.toString());
     }
+    
+    
   
 }

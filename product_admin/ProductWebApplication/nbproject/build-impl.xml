@@ -1014,7 +1014,6 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${reference.product_admin.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${libs.H2.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${reference.shared-project.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.INFO221_Shopping_Project-product_admin}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
@@ -1022,7 +1021,6 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${reference.product_admin.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${libs.H2.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${reference.shared-project.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.INFO221_Shopping_Project-product_admin}" todir="${build.web.dir}/WEB-INF/classes"/>
     </target>
     <target depends="init" if="dist.ear.dir" name="-clean-webinf-lib">
         <delete dir="${build.web.dir}/WEB-INF/lib"/>

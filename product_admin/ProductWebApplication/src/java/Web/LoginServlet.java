@@ -6,7 +6,9 @@
 package Web;
 
 import domain.Customer;
+import dao.CustomerCollectionsDAO;
 import dao.CustomerDatabaseManagement;
+import java.util.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,14 +17,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Jvic
  */
-@WebServlet(name = "AccountServlet", urlPatterns = {"/AccountServlet"})
-public class AccountServlet extends HttpServlet {
-    
+@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
+public class LoginServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,31 +37,34 @@ public class AccountServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            CustomerDatabaseManagement customerList = new CustomerDatabaseManagement();
+        
+        CustomerDatabaseManagement customerList = new CustomerDatabaseManagement();
+        HttpSession session = request.getSession();
+        if(session.getAttribute("customerLoggedIn") == null){
+            String userCode = request.getParameter("logName");
+            String userPass = request.getParameter("logPass");
 
-            String userCode = request.getParameter("UserCode");
-            String userName = request.getParameter("Name");
-            String userEmail = request.getParameter("Email");
-            String userAddress = request.getParameter("Address");
-            Integer userCredit = Integer.parseInt(request.getParameter("Credit"));
-            String userPass = request.getParameter("Password");
-            
-            Customer cust = new Customer();
-            
-            cust.username = userCode;
-            cust.name = userName;
-            cust.email = userEmail;
-            cust.address = userAddress;
-            cust.setCredit_card(userCredit);
-            cust.password = userPass;
-            
-            customerList.add(cust);
-            System.out.println("zcv");
-            
+            Collection<Customer> ctrList = customerList.get();
+
+            for(Customer customer : ctrList){
+                if(customer.getUsername().equals(userCode) && customer.getPassword().equals(userPass)){
+
+                    session.setAttribute("customerLoggedIn", customer);
+                    
+                    System.out.println("derp");
+                    response.sendRedirect("Login.jsp");
+                }else{
+                    System.out.println("derpx");
+                    response.sendRedirect(".");
+                }
+            }
+        }else{
+            session.removeAttribute("customerLoggedIn");
             response.sendRedirect(".");
-            
-                
-            
+        }
+
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

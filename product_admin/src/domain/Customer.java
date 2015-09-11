@@ -9,7 +9,7 @@ package domain;
  *
  * @author monvi967
  */
-public class Customer {
+public class Customer implements Comparable<Customer>{
     public String username;
     public String name;
     public Integer credit_card;
@@ -72,6 +72,15 @@ public class Customer {
     public String toString() {
         return "Customer{" + "username=" + username + ", name=" + name + '}';
     }
+
+    @Override
+    public int compareTo(Customer ctr) {
+        String a = this.username;
+        String b = ctr.getUsername();
+        return a.compareTo(b);
+    }
+
+
 
  
     
