@@ -36,7 +36,15 @@
                     <%=msg%>
                     <%
                 }
+                
+                    String all = "";
+                    String category = (String)session.getAttribute("productCategory");
+                    if(category != null){
+                        all = "<input type='submit' name='allButton' value='all' onclick='submit'>";
+                    }
             %>
+            
+            <%=all%>
      
         </form>
         <table>
@@ -47,25 +55,37 @@
                 <th>Category</th>
                 <th>Price</th>
             </tr>
-            <% for (Product pdt : pdtList){%>
-            <tr>
-                <td><%= pdt.getProduct_ID()%></td>
-                <td><%= pdt.getName()%></td>
-                <td><%= pdt.getDescription()%></td>
-                <td><%= pdt.getCategory() %></td>
-                <td><%= pdt.getPrice()%></td>
-            </tr>
-            
             <% 
-            
-            
-            
+                
+                    String tr = "<tr>";
+                    String trr = "</tr>";
+                    String td = "<td>";
+                    String tdd = "</td>";
+                    String dat;
+                if(category == null || category.equals("all")){
+    
+                for (Product pdt : pdtList){
+                                dat = tr + td + pdt.getProduct_ID() + tdd + td + pdt.getName() + tdd + td + pdt.getDescription() + tdd + td + pdt.getCategory()
+                                        + tdd + td + pdt.getPrice() + tdd + trr;
+            %>
+            <%= dat %>
+            <%       
             }
             
-            
-            
-            
-            
+                }else{
+                    
+                     for (Product pdt : pdtList){
+                         if(pdt.getCategory().equals(category)){
+                             dat = tr + td + pdt.getProduct_ID() + tdd + td + pdt.getName() + tdd + td + pdt.getDescription() + tdd + td + pdt.getCategory()
+                                        + tdd + td + pdt.getPrice() + tdd + trr;
+                             %>
+            <%= dat %>                                                                           
+                             <%
+                         }
+                     }
+                } 
+                    
+                
             %>
             
         </table>
