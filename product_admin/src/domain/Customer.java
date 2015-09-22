@@ -5,18 +5,33 @@
  */
 package domain;
 
+import net.sf.oval.constraint.*;
+
 /**
  *
  * @author monvi967
  */
 public class Customer implements Comparable<Customer>{
+    @NotNull(message="Username is mandatory")
+    @NotBlank(message="Username is mandatory")
     public String username;
+    @NotNull(message="Name is mandatory")
+    @NotBlank(message="Name is mandatory")
+    @Length(min=2, message="Name must contain at least two characters.")
     public String name;
+    @NotBlank(message="Credit card is mandatory")
+    @NotNull(message="Credit card is mandatory")
+    @Length(min=16, message="Credit card must contain at least two characters.")
     public Integer credit_card;
+    @NotNull(message="Password is mandatory")
     public String password;
+    @NotNull(message="Email is mandatory")
     public String email;
+    @NotNull(message="Address is mandatory")
     public String address;
-
+    
+    
+    
     public String getAddress() {
         return address;
     }

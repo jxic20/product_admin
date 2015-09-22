@@ -42,13 +42,9 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         if (session.getAttribute("customerLoggedIn") == null) {
             String userCode = request.getParameter("logName");
-            String userPass = request.getParameter("logPass");
-            
-            
+            String userPass = request.getParameter("logPass");                        
 
-            Customer customer = customerList.get(userCode, userPass);
-            
-
+            Customer customer = customerList.get(userCode, userPass);           
 
             if (customer != null) {
                 session.setAttribute("customerLoggedIn", customer);
