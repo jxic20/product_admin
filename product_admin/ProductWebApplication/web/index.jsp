@@ -12,6 +12,11 @@ and open the template in the editor.
     </head>
     <body>
         <%@include file="/WEB-INF/jspf/navbar.jspf" %>
+        <h1>Welcome to THIS SHOP!!!</h1>
+        <div>image here</div>
+        <div>image here</div>
+        <div>image here</div>
+        <p>We sell things :D</p>
         
     </body>
 </html>

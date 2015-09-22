@@ -1,7 +1,18 @@
 <%-- any content can be specified here e.g.: --%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Collection"%>
+<%@page import="domain.Order"%>
 <%@page import="domain.Customer"%>
 <%@ page pageEncoding="UTF-8" %>
-<% %>
+<%
+    String cart = (String) session.getAttribute("Order");
+    if(cart == null){
+        HashSet<Order> order = new HashSet();
+        session.setAttribute("Cart", order);
+    }
+
+
+%>
 
 <% 
     String message="";
@@ -10,7 +21,7 @@
     String typ = "button";
     Customer customer = (Customer)session.getAttribute("customerLoggedIn");
     if(customer != null){
-        message =customer.getName();
+        message = "Hi " + customer.getName() + ".";
         log = "Log out";
         Loc = "submit";  
         typ = "submit";
@@ -20,7 +31,7 @@
     }
 %>
 
-<h2>Welcome <%=message%></h2> 
+<h2><%=message%></h2> 
 
 <nav class="navBar">
     <form action="LoginServlet" method="POST">
@@ -30,6 +41,6 @@
         <input type="button" id="navViewCartButton" name="ViewCartButton" onclick="location.href = 'http://localhost:8080/shop/ViewCart.jsp';"value="View Cart">
         <input type="<%=typ%>" id= "navLogButton" name="Log button" onclick="<%=Loc%>" value="<%=log%>">
     </div>
-    </form>
-    
+    </form>   
 </nav>
+    

@@ -45,16 +45,17 @@ public class CustomerDatabaseManagement{
             }
     }
     
-    public Collection<Customer> get(){
+    public Customer get(String username, String password){
         
-            String sql = "select * from customer order by customer_id";
+            String sql = "select * from customer where customer_id = ? and password = ?";
             try(
                 Connection dbCon= JdbcConnection.getConnection(database_URL); 
                 PreparedStatement stmt = dbCon.prepareStatement(sql);
             ){
+                stmt.setString(1, username);
+                stmt.setString(2, password);
                 ResultSet rs = stmt.executeQuery();
-                Collection<Customer> ctr = new HashSet();
-                while(rs.next()){
+                if(rs.next()){
                     String id = rs.getString("customer_id");
                     String name = rs.getString("name");
                     String desc = rs.getString("email");
@@ -71,10 +72,10 @@ public class CustomerDatabaseManagement{
                     p.credit_card = price;
                     p.password = stock;
                     
-                    ctr.add(p); 
+                   return p; 
                 }
                 
-                return ctr;
+                return  null;
             }catch (SQLException ex){
                 throw new RuntimeException(ex);
 
