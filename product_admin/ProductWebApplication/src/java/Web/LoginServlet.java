@@ -40,7 +40,9 @@ public class LoginServlet extends HttpServlet {
         
         CustomerDatabaseManagement customerList = new CustomerDatabaseManagement();
         HttpSession session = request.getSession();
+
         if (session.getAttribute("customerLoggedIn") == null) {
+
             String userCode = request.getParameter("logName");
             String userPass = request.getParameter("logPass");                        
 
@@ -54,7 +56,6 @@ public class LoginServlet extends HttpServlet {
                 System.out.println("derpx");
                 response.sendRedirect("Login.jsp");
             }
-
         }else{
             String log = request.getParameter("Log button");
             
