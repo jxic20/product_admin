@@ -7,12 +7,11 @@ package Web;
 
 import dao.ProductCollectionsInterface;
 import dao.ProductsDatabaseManagement;
+import domain.OrderItem;
 import domain.Product;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.Collection;
-import java.util.TreeSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,8 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Jvic
  */
-@WebServlet(name = "ProductServlet", urlPatterns = {"/ProductServlet"})
-public class ProductServlet extends HttpServlet {
+@WebServlet(name = "CartServlet", urlPatterns = {"/CartServlet"})
+public class CartServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,30 +37,20 @@ public class ProductServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+
         HttpSession session = request.getSession();
-        ProductCollectionsInterface pdtDAO = new ProductsDatabaseManagement();
-        Collection<Product> pdtList = pdtDAO.get();
-        Collection<Product> categoryP = new TreeSet();
-        System.out.printf("HERE");
+
+        Product pdt = (Product)session.getAttribute("BuyProduct");
+        String quantity = request.getParameter("ProductQuantityToAdd");
+        Integer intQuantity = Integer.parseInt(quantity);
+        OrderItem o = new OrderItem();
         
-        String allButt = request.getParameter("allButton");
-        if(allButt == null){
-            for(Product pdt : pdtList){
-                String cat = pdt.getCategory();          
-                String catButt = request.getParameter((String)cat+"Button");
-                if(catButt != null){
-                        session.setAttribute("productCategory", cat);
-                        response.sendRedirect("ProductView.jsp");
-                    }
-            }                              
-        }else{
-        session.setAttribute("productCategory", null);
-        response.sendRedirect("ProductView.jsp");
-        }
+        o.quantity_purchased = intQuantity;
+        o.purchase_price = pdt.getPrice();
+        
         
 
-        
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

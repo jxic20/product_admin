@@ -13,4 +13,16 @@
         <exception-type>java.Lang.Exception</exception-type>
         <location>/FailPage.jsp</location>
     </error-page>
+    <error-page>
+        <error-code>422</error-code>
+        <location>/ValidationFailPage.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/ResourceFailPage.jsp</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.NumberFormatException</exception-type>
+        <location>/NumberFailPage.jsp</location>
+    </error-page>
 </web-app>

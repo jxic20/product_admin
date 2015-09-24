@@ -9,7 +9,6 @@ import dao.ProductCollectionsInterface;
 import dao.ProductsDatabaseManagement;
 import domain.Product;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.util.TreeSet;
@@ -24,8 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Jvic
  */
-@WebServlet(name = "ProductServlet", urlPatterns = {"/ProductServlet"})
-public class ProductServlet extends HttpServlet {
+@WebServlet(name = "BuyServlet", urlPatterns = {"/BuyServlet"})
+public class BuyServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,31 +37,29 @@ public class ProductServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        
         HttpSession session = request.getSession();
         ProductCollectionsInterface pdtDAO = new ProductsDatabaseManagement();
         Collection<Product> pdtList = pdtDAO.get();
-        Collection<Product> categoryP = new TreeSet();
-        System.out.printf("HERE");
         
-        String allButt = request.getParameter("allButton");
-        if(allButt == null){
-            for(Product pdt : pdtList){
-                String cat = pdt.getCategory();          
-                String catButt = request.getParameter((String)cat+"Button");
-                if(catButt != null){
-                        session.setAttribute("productCategory", cat);
-                        response.sendRedirect("ProductView.jsp");
-                    }
-            }                              
-        }else{
-        session.setAttribute("productCategory", null);
-        response.sendRedirect("ProductView.jsp");
+        /*primitive search by id for lack of a better way*/
+        for(Product pdt : pdtList){
+            String idx = pdt.getProduct_ID().toString();
+            String id = request.getParameter("Buy" + pdt.getName()+ "Button");
+            System.out.println(id + "id");
+            System.out.println(idx + "idx");
+            if(id!=null && idx.equals(id)){
+                System.out.println(id + "she");
+                 session.setAttribute("BuyProduct", pdt);
+                 response.sendRedirect("Quantity.jsp");
+            }
         }
         
-
         
         
     }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

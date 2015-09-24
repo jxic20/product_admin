@@ -10,11 +10,13 @@ import dao.CustomerDatabaseManagement;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.sf.oval.*;
 
 /**
  *
@@ -53,12 +55,28 @@ public class AccountServlet extends HttpServlet {
             cust.setCredit_card(userCredit);
             cust.password = userPass;
             
+            Validator validator = new Validator();
+            List<ConstraintViolation> violations = validator.validate(cust);
+            
+        if (violations.isEmpty()) {
+            // nope
             customerList.add(cust);
             System.out.println("zcv");
-            
             response.sendRedirect(".");
+        } else {
+            // yes, so show constraint messages to user
+            StringBuilder message = new StringBuilder();
+
+            //	loop through the violations extracting the message for each
+            for (ConstraintViolation violation : violations) {
+                message.append("<p>").append(violation.getMessage()).append("</p>");
+            }
+
+            // show a message box to the user with all the violation messages
             
-                
+            response.sendError(422, message.toString());
+            
+        }     
             
     }
 

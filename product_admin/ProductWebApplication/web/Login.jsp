@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
     </head>
@@ -22,7 +23,7 @@
             <br>
             
             <label for="logPass">Password</label>
-            <input type="text" name="logPass">
+            <input type="password" name="logPass">
             
             <br>
             

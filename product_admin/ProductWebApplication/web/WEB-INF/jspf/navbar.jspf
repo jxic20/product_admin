@@ -10,8 +10,6 @@
         HashSet<Order> order = new HashSet();
         session.setAttribute("Cart", order);
     }
-
-
 %>
 
 <% 

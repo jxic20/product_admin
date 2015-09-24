@@ -1,0 +1,22 @@
+nav{
+    
+    background-color: Black;
+    color: white;
+    border: solid brown thick;
+    width: auto;
+}
+nav form{
+    width: 370px;
+    margin: auto;
+}
+nav div{
+    padding: 5px;
+}
+
+nav input{
+    
+    display: inline;
+    margin-left: 5px;
+    margin-right: 5px;
+    
+}

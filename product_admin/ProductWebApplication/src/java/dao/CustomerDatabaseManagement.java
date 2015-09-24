@@ -78,7 +78,6 @@ public class CustomerDatabaseManagement{
                 return  null;
             }catch (SQLException ex){
                 throw new RuntimeException(ex);
-
             }
         
     }

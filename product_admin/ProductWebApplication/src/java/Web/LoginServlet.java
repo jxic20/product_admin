@@ -57,15 +57,13 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("Login.jsp");
             }
         }else{
-            String log = request.getParameter("Log button");
-            
+            String log = request.getParameter("Log button");      
             if(log.equals("Log out")){
                 session.setAttribute("customerLoggedIn", null);
+                session.invalidate();
                 response.sendRedirect(".");
             }
-        }
-        
-        
+        }  
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
