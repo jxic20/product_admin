@@ -21,7 +21,7 @@ public class Customer implements Comparable<Customer>{
     public String name;
     @NotBlank(message="Credit card is mandatory")
     @NotNull(message="Credit card is mandatory")
-    @Length(min=16, message="Credit card must contain at least two characters.")
+    @Length(min=16, max=16, message="Credit card must contain at least two characters.")
     public Integer credit_card;
     @NotNull(message="Password is mandatory")
     public String password;

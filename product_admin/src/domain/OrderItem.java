@@ -32,8 +32,5 @@ public class OrderItem {
     @Override
     public String toString() {
         return "OrderItem{" + "quantity_purchased=" + quantity_purchased + ", purchase_price=" + purchase_price + '}';
-    }
-    
-    
-    
+    }   
 }
