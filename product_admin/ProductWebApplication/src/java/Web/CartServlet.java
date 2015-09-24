@@ -7,11 +7,13 @@ package Web;
 
 import dao.ProductCollectionsInterface;
 import dao.ProductsDatabaseManagement;
+import domain.Order;
 import domain.OrderItem;
 import domain.Product;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.HashSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,8 +51,12 @@ public class CartServlet extends HttpServlet {
         o.quantity_purchased = intQuantity;
         o.purchase_price = pdt.getPrice();
         
+        HashSet<OrderItem> crt = (HashSet<OrderItem>) session.getAttribute("Cart");
+        crt.add(o);
+        session.setAttribute("Cart",crt);
         
-
+        session.removeAttribute("BuyProduct");
+        response.sendRedirect("ViewCart.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

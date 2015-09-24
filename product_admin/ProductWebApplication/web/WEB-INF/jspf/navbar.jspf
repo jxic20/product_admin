@@ -1,14 +1,18 @@
 <%-- any content can be specified here e.g.: --%>
+<%@page import="domain.OrderItem"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.Collection"%>
 <%@page import="domain.Order"%>
 <%@page import="domain.Customer"%>
 <%@ page pageEncoding="UTF-8" %>
 <%
-    String cart = (String) session.getAttribute("Order");
-    if(cart == null){
-        HashSet<Order> order = new HashSet();
-        session.setAttribute("Cart", order);
+    String cartOrder = (String) session.getAttribute("Order");
+    if(cartOrder == null){
+        Order order = new Order();
+        HashSet<OrderItem> orderItems = new HashSet();
+        session.setAttribute("Order", order);
+        session.setAttribute("Cart", orderItems);
+        
     }
 %>
 
