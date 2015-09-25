@@ -14,6 +14,7 @@
     </head>
     <body>
         <%@include file="/WEB-INF/jspf/navbar.jspf" %>
+
         <h1>Log In</h1>
         <p>Please log in to continue</p>
         <form method="POST" action="LoginServlet">

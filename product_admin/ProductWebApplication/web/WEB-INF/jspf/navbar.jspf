@@ -1,4 +1,7 @@
 <%-- any content can be specified here e.g.: --%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="domain.Product"%>
 <%@page import="domain.OrderItem"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.Collection"%>
@@ -6,12 +9,14 @@
 <%@page import="domain.Customer"%>
 <%@ page pageEncoding="UTF-8" %>
 <%
-    String cartOrder = (String) session.getAttribute("Order");
+    Order cartOrder = (Order) session.getAttribute("Order");
     if(cartOrder == null){
         Order order = new Order();
-        HashSet<OrderItem> orderItems = new HashSet();
+        List<OrderItem> orderItems = new ArrayList();
+        List<Product> items = new ArrayList();
         session.setAttribute("Order", order);
         session.setAttribute("Cart", orderItems);
+        session.setAttribute("itemCart", items);
         
     }
 %>
@@ -19,7 +24,7 @@
 <% 
     String message="";
     String log = "Log in";
-    String Loc = "location.href = 'http://localhost:8080/shop/Login.jsp';";
+    String Loc = "location.href = 'Login.jsp';";
     String typ = "button";
     Customer customer = (Customer)session.getAttribute("customerLoggedIn");
     if(customer != null){
@@ -28,7 +33,7 @@
         Loc = "submit";  
         typ = "submit";
     }else if(customer == null){
-        Loc = "location.href = 'http://localhost:8080/shop/Login.jsp';";
+        Loc = "location.href = 'Login.jsp';";
         typ = "button";
     }
 %>
@@ -38,9 +43,9 @@
 <nav class="navBar">
     <form action="LoginServlet" method="POST">
     <div>
-        <input type="button" id="navHomeButton" name="HomeButton" onclick="location.href = 'http://localhost:8080/shop/';" value="Home">
-        <input type="button" id="navBrowseProductsButton" name="BrowseProductsButton"onclick="location.href = 'http://localhost:8080/shop/ProductView.jsp';" value="Browse Products">
-        <input type="button" id="navViewCartButton" name="ViewCartButton" onclick="location.href = 'http://localhost:8080/shop/ViewCart.jsp';"value="View Cart">
+        <input type="button" id="navHomeButton" name="HomeButton" onclick="location.href = 'index.jsp';" value="Home">
+        <input type="button" id="navBrowseProductsButton" name="BrowseProductsButton"onclick="location.href = 'ProductView.jsp';" value="Browse Products">
+        <input type="button" id="navViewCartButton" name="ViewCartButton" onclick="location.href = 'ViewCart.jsp';"value="View Cart">
         <input type="<%=typ%>" id= "navLogButton" name="Log button" onclick="<%=Loc%>" value="<%=log%>">
     </div>
     </form>   

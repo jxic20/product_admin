@@ -15,6 +15,15 @@ import java.util.Date;
 public class Order {
     public Integer order_ID;
     public Date order_date;
+    public String c_id;
+
+    public String getC_id() {
+        return c_id;
+    }
+
+    public void setC_id(String c_id) {
+        this.c_id = c_id;
+    }
     
 
     public Integer getOrder_ID() {

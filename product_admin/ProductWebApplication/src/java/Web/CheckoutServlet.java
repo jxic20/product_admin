@@ -5,15 +5,13 @@
  */
 package Web;
 
-import dao.ProductCollectionsInterface;
-import dao.ProductsDatabaseManagement;
+import dao.OrderDAO;
+import domain.Customer;
 import domain.Order;
 import domain.OrderItem;
-import domain.Product;
+import java.util.Date;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,8 +24,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Jvic
  */
-@WebServlet(name = "CartServlet", urlPatterns = {"/CartServlet"})
-public class CartServlet extends HttpServlet {
+@WebServlet(name = "CheckoutServlet", urlPatterns = {"/CheckoutServlet"})
+public class CheckoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,28 +39,32 @@ public class CartServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
+        
         HttpSession session = request.getSession();
+        OrderDAO ordao = new OrderDAO();
+        Customer cst = (Customer) session.getAttribute("customerLoggedIn");
+         List<OrderItem> ordList = (List<OrderItem>) session.getAttribute("Cart");
+        java.util.Date date = new java.util.Date();
+        if(cst == null){
+            response.sendRedirect("Login.jsp");
+        }else{
+            Order ord = (Order)session.getAttribute("Order");
+            ord.setC_id(cst.getUsername());
+            ord.setOrder_date(date);
+            ordao.add(ord, ordList);
+            
 
-        Product pdt = (Product)session.getAttribute("BuyProduct");
-        String quantity = request.getParameter("ProductQuantityToAdd");
-        Integer intQuantity = Integer.parseInt(quantity);
-        OrderItem o = new OrderItem();
+            
+            session.setAttribute("Cart", null);
+            session.setAttribute("itemCart", null);
+            session.setAttribute("Order", null);
+            
+            response.sendRedirect("Thanks.jsp");
+        }
         
-        o.quantity_purchased = intQuantity;
-        o.purchase_price = pdt.getPrice();
-        o.p_id = pdt.getProduct_ID();
         
-        List<OrderItem> crt = (List<OrderItem>) session.getAttribute("Cart");
-        crt.add(o);
-        session.setAttribute("Cart",crt);
         
-        List<Product> itemCrt = (List<Product>) session.getAttribute("itemCart");
-        itemCrt.add(pdt);
-        session.setAttribute("itemCart",itemCrt);
         
-        session.removeAttribute("BuyProduct");
-        response.sendRedirect("ViewCart.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

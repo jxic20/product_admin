@@ -26,7 +26,7 @@ public class CustomerDatabaseManagement{
     public void add(Customer ctr){
             String sql = "merge into Customer (customer_id, name, email, address, credit_card, password)"
                     + "values (?,?,?,?,?,?)";
-            try(
+            try( 
                 Connection dbCon= JdbcConnection.getConnection(database_URL); 
                 PreparedStatement stmt = dbCon.prepareStatement(sql);
             ){

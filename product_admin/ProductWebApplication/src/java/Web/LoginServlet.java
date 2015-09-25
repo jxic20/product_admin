@@ -8,6 +8,7 @@ package Web;
 import domain.Customer;
 import dao.CustomerCollectionsDAO;
 import dao.CustomerDatabaseManagement;
+import domain.Order;
 import java.util.*;
 
 import java.io.IOException;
@@ -40,6 +41,8 @@ public class LoginServlet extends HttpServlet {
         
         CustomerDatabaseManagement customerList = new CustomerDatabaseManagement();
         HttpSession session = request.getSession();
+
+        
 
         if (session.getAttribute("customerLoggedIn") == null) {
 
